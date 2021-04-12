@@ -7,22 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A50CCC9B25BDA45C00A11614 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50CCC9A25BDA45C00A11614 /* AppDelegate.swift */; };
-		A50CCC9D25BDA46100A11614 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A50CCC9C25BDA46100A11614 /* Assets.xcassets */; };
-		A50CCCA025BDA46100A11614 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50CCC9E25BDA46100A11614 /* MainMenu.xib */; };
+		A51D61C52624F397008403F8 /* PerfectMatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D61C42624F397008403F8 /* PerfectMatchApp.swift */; };
+		A51D61C72624F397008403F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D61C62624F397008403F8 /* ContentView.swift */; };
+		A51D61C92624F39C008403F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A51D61C82624F39C008403F8 /* Assets.xcassets */; };
+		A51D61CC2624F39C008403F8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A51D61CB2624F39C008403F8 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A50CCC9725BDA45C00A11614 /* PerfectMatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerfectMatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A50CCC9A25BDA45C00A11614 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A50CCC9C25BDA46100A11614 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A50CCC9F25BDA46100A11614 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		A50CCCA125BDA46100A11614 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A50CCCA225BDA46100A11614 /* PerfectMatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PerfectMatch.entitlements; sourceTree = "<group>"; };
+		A51D61C12624F397008403F8 /* PerfectMatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerfectMatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A51D61C42624F397008403F8 /* PerfectMatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfectMatchApp.swift; sourceTree = "<group>"; };
+		A51D61C62624F397008403F8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A51D61C82624F39C008403F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A51D61CB2624F39C008403F8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A51D61CD2624F39C008403F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A51D61CE2624F39D008403F8 /* PerfectMatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PerfectMatch.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A50CCC9425BDA45C00A11614 /* Frameworks */ = {
+		A51D61BE2624F397008403F8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -32,44 +34,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A50CCC8E25BDA45C00A11614 = {
+		A51D61B82624F397008403F8 = {
 			isa = PBXGroup;
 			children = (
-				A50CCC9925BDA45C00A11614 /* PerfectMatch */,
-				A50CCC9825BDA45C00A11614 /* Products */,
+				A51D61C32624F397008403F8 /* PerfectMatch */,
+				A51D61C22624F397008403F8 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		A50CCC9825BDA45C00A11614 /* Products */ = {
+		A51D61C22624F397008403F8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A50CCC9725BDA45C00A11614 /* PerfectMatch.app */,
+				A51D61C12624F397008403F8 /* PerfectMatch.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A50CCC9925BDA45C00A11614 /* PerfectMatch */ = {
+		A51D61C32624F397008403F8 /* PerfectMatch */ = {
 			isa = PBXGroup;
 			children = (
-				A50CCC9A25BDA45C00A11614 /* AppDelegate.swift */,
-				A50CCC9C25BDA46100A11614 /* Assets.xcassets */,
-				A50CCC9E25BDA46100A11614 /* MainMenu.xib */,
-				A50CCCA125BDA46100A11614 /* Info.plist */,
-				A50CCCA225BDA46100A11614 /* PerfectMatch.entitlements */,
+				A51D61C42624F397008403F8 /* PerfectMatchApp.swift */,
+				A51D61C62624F397008403F8 /* ContentView.swift */,
+				A51D61C82624F39C008403F8 /* Assets.xcassets */,
+				A51D61CD2624F39C008403F8 /* Info.plist */,
+				A51D61CE2624F39D008403F8 /* PerfectMatch.entitlements */,
+				A51D61CA2624F39C008403F8 /* Preview Content */,
 			);
 			path = PerfectMatch;
+			sourceTree = "<group>";
+		};
+		A51D61CA2624F39C008403F8 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				A51D61CB2624F39C008403F8 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A50CCC9625BDA45C00A11614 /* PerfectMatch */ = {
+		A51D61C02624F397008403F8 /* PerfectMatch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A50CCCA525BDA46100A11614 /* Build configuration list for PBXNativeTarget "PerfectMatch" */;
+			buildConfigurationList = A51D61D12624F39D008403F8 /* Build configuration list for PBXNativeTarget "PerfectMatch" */;
 			buildPhases = (
-				A50CCC9325BDA45C00A11614 /* Sources */,
-				A50CCC9425BDA45C00A11614 /* Frameworks */,
-				A50CCC9525BDA45C00A11614 /* Resources */,
+				A51D61BD2624F397008403F8 /* Sources */,
+				A51D61BE2624F397008403F8 /* Frameworks */,
+				A51D61BF2624F397008403F8 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -77,24 +88,24 @@
 			);
 			name = PerfectMatch;
 			productName = PerfectMatch;
-			productReference = A50CCC9725BDA45C00A11614 /* PerfectMatch.app */;
+			productReference = A51D61C12624F397008403F8 /* PerfectMatch.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		A50CCC8F25BDA45C00A11614 /* Project object */ = {
+		A51D61B92624F397008403F8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1230;
-				LastUpgradeCheck = 1230;
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
 				TargetAttributes = {
-					A50CCC9625BDA45C00A11614 = {
-						CreatedOnToolsVersion = 12.3;
+					A51D61C02624F397008403F8 = {
+						CreatedOnToolsVersion = 12.4;
 					};
 				};
 			};
-			buildConfigurationList = A50CCC9225BDA45C00A11614 /* Build configuration list for PBXProject "PerfectMatch" */;
+			buildConfigurationList = A51D61BC2624F397008403F8 /* Build configuration list for PBXProject "PerfectMatch" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -102,52 +113,42 @@
 				en,
 				Base,
 			);
-			mainGroup = A50CCC8E25BDA45C00A11614;
-			productRefGroup = A50CCC9825BDA45C00A11614 /* Products */;
+			mainGroup = A51D61B82624F397008403F8;
+			productRefGroup = A51D61C22624F397008403F8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A50CCC9625BDA45C00A11614 /* PerfectMatch */,
+				A51D61C02624F397008403F8 /* PerfectMatch */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A50CCC9525BDA45C00A11614 /* Resources */ = {
+		A51D61BF2624F397008403F8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A50CCC9D25BDA46100A11614 /* Assets.xcassets in Resources */,
-				A50CCCA025BDA46100A11614 /* MainMenu.xib in Resources */,
+				A51D61CC2624F39C008403F8 /* Preview Assets.xcassets in Resources */,
+				A51D61C92624F39C008403F8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A50CCC9325BDA45C00A11614 /* Sources */ = {
+		A51D61BD2624F397008403F8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A50CCC9B25BDA45C00A11614 /* AppDelegate.swift in Sources */,
+				A51D61C72624F397008403F8 /* ContentView.swift in Sources */,
+				A51D61C52624F397008403F8 /* PerfectMatchApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		A50CCC9E25BDA46100A11614 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A50CCC9F25BDA46100A11614 /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		A50CCCA325BDA46100A11614 /* Debug */ = {
+		A51D61CF2624F39D008403F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -198,7 +199,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -208,7 +209,7 @@
 			};
 			name = Debug;
 		};
-		A50CCCA425BDA46100A11614 /* Release */ = {
+		A51D61D02624F39D008403F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -253,7 +254,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -262,7 +263,7 @@
 			};
 			name = Release;
 		};
-		A50CCCA625BDA46100A11614 /* Debug */ = {
+		A51D61D22624F39D008403F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -270,20 +271,23 @@
 				CODE_SIGN_ENTITLEMENTS = PerfectMatch/PerfectMatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"PerfectMatch/Preview Content\"";
 				DEVELOPMENT_TEAM = 8V4284788Y;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = PerfectMatch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.japanese-goblinn.PerfectMatch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		A50CCCA725BDA46100A11614 /* Release */ = {
+		A51D61D32624F39D008403F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -291,13 +295,16 @@
 				CODE_SIGN_ENTITLEMENTS = PerfectMatch/PerfectMatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"PerfectMatch/Preview Content\"";
 				DEVELOPMENT_TEAM = 8V4284788Y;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = PerfectMatch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.japanese-goblinn.PerfectMatch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -307,25 +314,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A50CCC9225BDA45C00A11614 /* Build configuration list for PBXProject "PerfectMatch" */ = {
+		A51D61BC2624F397008403F8 /* Build configuration list for PBXProject "PerfectMatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A50CCCA325BDA46100A11614 /* Debug */,
-				A50CCCA425BDA46100A11614 /* Release */,
+				A51D61CF2624F39D008403F8 /* Debug */,
+				A51D61D02624F39D008403F8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A50CCCA525BDA46100A11614 /* Build configuration list for PBXNativeTarget "PerfectMatch" */ = {
+		A51D61D12624F39D008403F8 /* Build configuration list for PBXNativeTarget "PerfectMatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A50CCCA625BDA46100A11614 /* Debug */,
-				A50CCCA725BDA46100A11614 /* Release */,
+				A51D61D22624F39D008403F8 /* Debug */,
+				A51D61D32624F39D008403F8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = A50CCC8F25BDA45C00A11614 /* Project object */;
+	rootObject = A51D61B92624F397008403F8 /* Project object */;
 }
