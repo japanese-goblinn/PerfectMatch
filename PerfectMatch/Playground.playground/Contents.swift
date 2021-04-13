@@ -1,4 +1,4 @@
 import Cocoa
+import PerfectMatchDiffing
 
-var str = "Hello, playground"
-print(str)
+print(Diffing().text)
