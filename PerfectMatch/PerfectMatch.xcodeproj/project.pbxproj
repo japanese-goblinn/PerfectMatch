@@ -22,7 +22,6 @@
 		A51D61CB2624F39C008403F8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A51D61CD2624F39C008403F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A51D61CE2624F39D008403F8 /* PerfectMatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PerfectMatch.entitlements; sourceTree = "<group>"; };
-		A51D61D52624F5E0008403F8 /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Playground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A51D61DF2624F957008403F8 /* PerfectMatchDiffing */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PerfectMatchDiffing; path = ../PerfectMatchDiffing; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -42,7 +41,6 @@
 			isa = PBXGroup;
 			children = (
 				A51D61DF2624F957008403F8 /* PerfectMatchDiffing */,
-				A51D61D52624F5E0008403F8 /* Playground.playground */,
 				A51D61C32624F397008403F8 /* PerfectMatch */,
 				A51D61C22624F397008403F8 /* Products */,
 				A51D61DA2624F885008403F8 /* Frameworks */,
