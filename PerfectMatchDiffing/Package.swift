@@ -6,12 +6,23 @@ import PackageDescription
 let package = Package(
     name: "PerfectMatchDiffing",
     products: [
-        .library(name: "PerfectMatchDiffing", targets: ["PerfectMatchDiffing"])
+        .library(name: "PerfectMatchDiffing", targets: ["HeckellsDifference"])
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-collections", .branch("main"))
+    ],
     targets: [
-        .target(name: "PerfectMatchDiffing", dependencies: []),
-        
-        .testTarget(name: "PerfectMatchDiffingTests", dependencies: ["PerfectMatchDiffing"]),
+        .target(
+            name: "HeckellsDifference",
+            dependencies: [
+                .product(name: "Collections", package: "swift-collections")
+            ]
+        ),
+        .testTarget(
+            name: "PerfectMatchDiffingTests",
+            dependencies: [
+                .target(name: "HeckellsDifference")
+            ]
+        ),
     ]
 )
