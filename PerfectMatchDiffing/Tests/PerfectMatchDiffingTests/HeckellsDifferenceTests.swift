@@ -14,7 +14,7 @@ internal final class PerfectMatchDiffingTests: XCTestCase {
     entry.increment()
     XCTAssertEqual(entry, .many)
   }
-  
+    
   internal func testHeckellsDifference() {
     let diff1 = HeckellsDifference(
       of: "🤡😎",
