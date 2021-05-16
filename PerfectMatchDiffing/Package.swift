@@ -4,25 +4,25 @@
 import PackageDescription
 
 let package = Package(
-    name: "PerfectMatchDiffing",
-    products: [
-        .library(name: "PerfectMatchDiffing", targets: ["HeckellsDifference"])
-    ],
-    dependencies: [
-        .package(url: "https://github.com/apple/swift-collections", .branch("main"))
-    ],
-    targets: [
-        .target(
-            name: "HeckellsDifference",
-            dependencies: [
-                .product(name: "Collections", package: "swift-collections")
-            ]
-        ),
-        .testTarget(
-            name: "PerfectMatchDiffingTests",
-            dependencies: [
-                .target(name: "HeckellsDifference")
-            ]
-        ),
-    ]
+  name: "PerfectMatchDiffing",
+  products: [
+    .library(name: "PerfectMatchDiffing", targets: ["HeckellsDifference"])
+  ],
+  dependencies: [
+    .package(url: "https://github.com/apple/swift-collections", .branch("main"))
+  ],
+  targets: [
+    .target(
+      name: "HeckellsDifference",
+      dependencies: [
+        .product(name: "Collections", package: "swift-collections")
+      ]
+    ),
+    .testTarget(
+      name: "PerfectMatchDiffingTests",
+      dependencies: [
+        .target(name: "HeckellsDifference")
+      ]
+    ),
+  ]
 )
