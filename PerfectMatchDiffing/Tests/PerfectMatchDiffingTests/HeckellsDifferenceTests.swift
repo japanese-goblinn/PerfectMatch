@@ -1,9 +1,9 @@
 import XCTest
 @testable import HeckellsDifference
 
-final class PerfectMatchDiffingTests: XCTestCase {
+internal final class PerfectMatchDiffingTests: XCTestCase {
   
-  func testHeckellsDifferenceElementOcurrence() {
+  internal func testHeckellsDifferenceElementOcurrence() {
     var entry: HeckellsDifference<Array<Int>>.ElementOcurrence = .zero
     entry.increment()
     XCTAssertEqual(entry, .one)
@@ -15,7 +15,7 @@ final class PerfectMatchDiffingTests: XCTestCase {
     XCTAssertEqual(entry, .many)
   }
   
-  func testHeckellsDifference() {
+  internal func testHeckellsDifference() {
     let diff1 = HeckellsDifference(
       of: "🤡😎",
       and: "😎🤡"
@@ -37,22 +37,19 @@ final class PerfectMatchDiffingTests: XCTestCase {
       and: "BA"
     )
     XCTAssertEqual(diff4.moves.count, 4)
+    
+    let diff5 = HeckellsDifference(
+      of: "The men are bad. I hate the men",
+      and: "The men are bad. John likes the men. I hate the men"
+    )
+    XCTAssertEqual(diff5.moves.count, "John likes the men. ".count)
   }
-  
-  func testCollectionDiffer() {
+
+  internal func testCollectionDiffer() {
     let s1 = "ABCABC"
     let s2 = "ACABCB"
     let diff1 = s1.differ(from: s2)
     let diff2 = HeckellsDifference(of: s1, and: s2)
     XCTAssertEqual(diff1.moves, diff2.moves)
   }
-  
-  func testPerformance1() {
-    let data1 = Array(repeating: UUID(), count: 5000)
-    let data2 = data1.shuffled()
-    measure {
-      var d = HeckellsDifference(of: data1, and: data2)
-    }
-  }
-  
 }
