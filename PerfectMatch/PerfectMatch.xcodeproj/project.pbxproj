@@ -13,6 +13,7 @@
 		A51D61CC2624F39C008403F8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A51D61CB2624F39C008403F8 /* Preview Assets.xcassets */; };
 		A51D61E22624F9DC008403F8 /* PerfectMatchDiffing in Frameworks */ = {isa = PBXBuildFile; productRef = A51D61E12624F9DC008403F8 /* PerfectMatchDiffing */; };
 		A5A6D7E126517BBC0070A02D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6D7E026517BBC0070A02D /* AppDelegate.swift */; };
+		A5CA8BBE2651C4DA000EAE32 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CA8BBD2651C4DA000EAE32 /* Images.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		A51D61CE2624F39D008403F8 /* PerfectMatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PerfectMatch.entitlements; sourceTree = "<group>"; };
 		A51D61DF2624F957008403F8 /* PerfectMatchDiffing */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PerfectMatchDiffing; path = ../PerfectMatchDiffing; sourceTree = "<group>"; };
 		A5A6D7E026517BBC0070A02D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A5CA8BBD2651C4DA000EAE32 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5A6D7E126517BBC0070A02D /* AppDelegate.swift in Sources */,
+				A5CA8BBE2651C4DA000EAE32 /* Images.swift in Sources */,
 				A51D61C72624F397008403F8 /* ContentView.swift in Sources */,
 				A51D61C52624F397008403F8 /* PerfectMatchApp.swift in Sources */,
 			);
