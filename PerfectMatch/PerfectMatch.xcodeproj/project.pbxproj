@@ -60,9 +60,8 @@
 		A51D61C32624F397008403F8 /* PerfectMatch */ = {
 			isa = PBXGroup;
 			children = (
-				A51D61C42624F397008403F8 /* PerfectMatchApp.swift */,
-				A5A6D7E026517BBC0070A02D /* AppDelegate.swift */,
-				A51D61C62624F397008403F8 /* ContentView.swift */,
+				A5CA8BC02651C6F9000EAE32 /* App */,
+				A5CA8BBF2651C6D9000EAE32 /* Resources */,
 				A51D61C82624F39C008403F8 /* Assets.xcassets */,
 				A51D61CD2624F39C008403F8 /* Info.plist */,
 				A51D61CE2624F39D008403F8 /* PerfectMatch.entitlements */,
@@ -84,6 +83,32 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A5CA8BBF2651C6D9000EAE32 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A5CA8BBD2651C4DA000EAE32 /* Images.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A5CA8BC02651C6F9000EAE32 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A5CA8BC12651C70B000EAE32 /* Views */,
+				A51D61C42624F397008403F8 /* PerfectMatchApp.swift */,
+				A5A6D7E026517BBC0070A02D /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A5CA8BC12651C70B000EAE32 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A51D61C62624F397008403F8 /* ContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

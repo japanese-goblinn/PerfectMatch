@@ -1,8 +1,14 @@
 import SwiftUI
 
 struct ContentView: View {
+  
   var body: some View {
     Text("Hello, world!")
+      .toolbar {
+        ToolbarItemGroup {
+          Image(systemSymbol: .gearshapeFill)
+        }
+      }
       .frame(
         minWidth: 700,
         maxWidth: .infinity,
