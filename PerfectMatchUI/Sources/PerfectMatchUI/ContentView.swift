@@ -24,9 +24,3 @@ public struct ContentView: View {
   
   public init() {}
 }
-
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    ContentView()
-  }
-}
