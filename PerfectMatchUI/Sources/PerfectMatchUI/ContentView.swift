@@ -1,9 +1,14 @@
-import SwiftUI
+import PerfectMatchHeckellsDifference
+import PerfectMatchResources
 
-struct ContentView: View {
+import PerfectMatchDependencies_Sourceful
+
+public struct ContentView: View {
   
-  var body: some View {
-    Text("Hello, world!")
+  @State private var string = "let a = 4"
+  
+  public var body: some View {
+    SourceCodeTextEditor(text: $string)
       .toolbar {
         ToolbarItemGroup {
           Image(systemSymbol: .gearshapeFill)
@@ -16,6 +21,8 @@ struct ContentView: View {
         maxHeight: .infinity
       )
   }
+  
+  public init() {}
 }
 
 struct ContentView_Previews: PreviewProvider {

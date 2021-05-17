@@ -1,4 +1,4 @@
-import SwiftUI
+import PerfectMatchUI
 
 @main
 struct PerfectMatchApp: App {

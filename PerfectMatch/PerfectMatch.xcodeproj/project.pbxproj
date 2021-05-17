@@ -8,25 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		A51D61C52624F397008403F8 /* PerfectMatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D61C42624F397008403F8 /* PerfectMatchApp.swift */; };
-		A51D61C72624F397008403F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D61C62624F397008403F8 /* ContentView.swift */; };
 		A51D61C92624F39C008403F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A51D61C82624F39C008403F8 /* Assets.xcassets */; };
 		A51D61CC2624F39C008403F8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A51D61CB2624F39C008403F8 /* Preview Assets.xcassets */; };
-		A51D61E22624F9DC008403F8 /* PerfectMatchDiffing in Frameworks */ = {isa = PBXBuildFile; productRef = A51D61E12624F9DC008403F8 /* PerfectMatchDiffing */; };
 		A5A6D7E126517BBC0070A02D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A6D7E026517BBC0070A02D /* AppDelegate.swift */; };
-		A5CA8BBE2651C4DA000EAE32 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CA8BBD2651C4DA000EAE32 /* Images.swift */; };
+		A5CA8BCE2652FF86000EAE32 /* PerfectMatchUI in Frameworks */ = {isa = PBXBuildFile; productRef = A5CA8BCD2652FF86000EAE32 /* PerfectMatchUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A51D61C12624F397008403F8 /* PerfectMatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerfectMatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A51D61C42624F397008403F8 /* PerfectMatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfectMatchApp.swift; sourceTree = "<group>"; };
-		A51D61C62624F397008403F8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A51D61C82624F39C008403F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A51D61CB2624F39C008403F8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A51D61CD2624F39C008403F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A51D61CE2624F39D008403F8 /* PerfectMatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PerfectMatch.entitlements; sourceTree = "<group>"; };
 		A51D61DF2624F957008403F8 /* PerfectMatchDiffing */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PerfectMatchDiffing; path = ../PerfectMatchDiffing; sourceTree = "<group>"; };
 		A5A6D7E026517BBC0070A02D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A5CA8BBD2651C4DA000EAE32 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		A5ED0D682653086C002FA025 /* PerfectMatchDependencies */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PerfectMatchDependencies; path = ../PerfectMatchDependencies; sourceTree = "<group>"; };
+		A5ED0D692653087C002FA025 /* PerfectMatchResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PerfectMatchResources; path = ../PerfectMatchResources; sourceTree = "<group>"; };
+		A5ED0D6A26530880002FA025 /* PerfectMatchUI */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PerfectMatchUI; path = ../PerfectMatchUI; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,7 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A51D61E22624F9DC008403F8 /* PerfectMatchDiffing in Frameworks */,
+				A5CA8BCE2652FF86000EAE32 /* PerfectMatchUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +43,9 @@
 		A51D61B82624F397008403F8 = {
 			isa = PBXGroup;
 			children = (
+				A5ED0D6A26530880002FA025 /* PerfectMatchUI */,
+				A5ED0D692653087C002FA025 /* PerfectMatchResources */,
+				A5ED0D682653086C002FA025 /* PerfectMatchDependencies */,
 				A51D61DF2624F957008403F8 /* PerfectMatchDiffing */,
 				A51D61C32624F397008403F8 /* PerfectMatch */,
 				A51D61C22624F397008403F8 /* Products */,
@@ -62,8 +64,8 @@
 		A51D61C32624F397008403F8 /* PerfectMatch */ = {
 			isa = PBXGroup;
 			children = (
-				A5CA8BC02651C6F9000EAE32 /* App */,
-				A5CA8BBF2651C6D9000EAE32 /* Resources */,
+				A51D61C42624F397008403F8 /* PerfectMatchApp.swift */,
+				A5A6D7E026517BBC0070A02D /* AppDelegate.swift */,
 				A51D61C82624F39C008403F8 /* Assets.xcassets */,
 				A51D61CD2624F39C008403F8 /* Info.plist */,
 				A51D61CE2624F39D008403F8 /* PerfectMatch.entitlements */,
@@ -87,32 +89,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A5CA8BBF2651C6D9000EAE32 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				A5CA8BBD2651C4DA000EAE32 /* Images.swift */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		A5CA8BC02651C6F9000EAE32 /* App */ = {
-			isa = PBXGroup;
-			children = (
-				A5CA8BC12651C70B000EAE32 /* Views */,
-				A51D61C42624F397008403F8 /* PerfectMatchApp.swift */,
-				A5A6D7E026517BBC0070A02D /* AppDelegate.swift */,
-			);
-			path = App;
-			sourceTree = "<group>";
-		};
-		A5CA8BC12651C70B000EAE32 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				A51D61C62624F397008403F8 /* ContentView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -130,7 +106,7 @@
 			);
 			name = PerfectMatch;
 			packageProductDependencies = (
-				A51D61E12624F9DC008403F8 /* PerfectMatchDiffing */,
+				A5CA8BCD2652FF86000EAE32 /* PerfectMatchUI */,
 			);
 			productName = PerfectMatch;
 			productReference = A51D61C12624F397008403F8 /* PerfectMatch.app */;
@@ -186,8 +162,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5A6D7E126517BBC0070A02D /* AppDelegate.swift in Sources */,
-				A5CA8BBE2651C4DA000EAE32 /* Images.swift in Sources */,
-				A51D61C72624F397008403F8 /* ContentView.swift in Sources */,
 				A51D61C52624F397008403F8 /* PerfectMatchApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,9 +356,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A51D61E12624F9DC008403F8 /* PerfectMatchDiffing */ = {
+		A5CA8BCD2652FF86000EAE32 /* PerfectMatchUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = PerfectMatchDiffing;
+			productName = PerfectMatchUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
