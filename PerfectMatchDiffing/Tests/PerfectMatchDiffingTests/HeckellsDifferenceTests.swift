@@ -1,5 +1,5 @@
 import XCTest
-@testable import HeckellsDifference
+@testable import Perfec
 
 internal final class PerfectMatchDiffingTests: XCTestCase {
   

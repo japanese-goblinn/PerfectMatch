@@ -5,15 +5,18 @@ import PackageDescription
 
 let package = Package(
   name: "PerfectMatchDiffing",
+  platforms: [
+    .macOS(.v11)
+  ],
   products: [
-    .library(name: "PerfectMatchDiffing", targets: ["HeckellsDifference"])
+    .library(name: "PerfectMatchDiffing", targets: ["PerfectMatchHeckellsDifference"])
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-collections", .branch("main"))
   ],
   targets: [
     .target(
-      name: "HeckellsDifference",
+      name: "PerfectMatchHeckellsDifference",
       dependencies: [
         .product(name: "Collections", package: "swift-collections")
       ]
@@ -21,7 +24,7 @@ let package = Package(
     .testTarget(
       name: "PerfectMatchDiffingTests",
       dependencies: [
-        .target(name: "HeckellsDifference")
+        .target(name: "PerfectMatchHeckellsDifference")
       ]
     ),
   ]
