@@ -9,10 +9,7 @@ let package = Package(
     .macOS(.v11)
   ],
   products: [
-    .library(
-      name: "PerfectMatchDependencies_Sourceful",
-      targets: ["PerfectMatchDependencies_Sourceful"]
-    )
+    .library(name: "PerfectMatchDependencies_Sourceful", targets: ["PerfectMatchDependencies_Sourceful"])
   ],
   dependencies: [
     .package(url: "git@github.com:twostraws/Sourceful.git", .branch("main")),
