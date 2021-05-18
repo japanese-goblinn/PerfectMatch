@@ -13,6 +13,22 @@ public struct HeckellsDifference<
   
   @inlinable
   public init(of old: DiffableCollection, and new: DiffableCollection) {
+    if old.isEmpty, new.isEmpty {
+      return
+    }
+    if old.isNotEmpty, new.isEmpty {
+      for (i, _) in old.indices.enumerated() {
+        moves.append(.delete(i))
+      }
+      return
+    }
+    if old.isEmpty, new.isNotEmpty {
+      for (i, _) in new.indices.enumerated() {
+        moves.append(.insert(i))
+      }
+      return
+    }
+    
     let oldCount = old.count
     var table = [DiffableCollection.Element: ElementEntry](minimumCapacity: oldCount)
     var oa = [Either<ElementEntry, Index>]()
@@ -35,17 +51,17 @@ public struct HeckellsDifference<
     
     // 2
     for (index, element) in old.enumerated() {
-      let entry: ElementEntry
       if let existingEntry = table[element] {
-        entry = existingEntry
+        existingEntry.elementOcurrencesInO.increment()
+        existingEntry.elementNumberInO.push(index)
+        oa.append(.left(existingEntry))
       } else {
-        entry = .init()
+        let entry = ElementEntry()
+        entry.elementOcurrencesInO.increment()
+        entry.elementNumberInO.push(index)
+        oa.append(.left(entry))
         table[element] = entry
       }
-      table[element] = entry
-      entry.elementOcurrencesInO.increment()
-      entry.elementNumberInO.push(index)
-      oa.append(.left(entry))
     }
     
     // 3
@@ -160,12 +176,7 @@ extension HeckellsDifference {
       }
     }
   }
-  
-  @usableFromInline
-  internal struct Moves {
-    var insertions = [Index]()
-  }
-  
+    
   @usableFromInline
   internal enum Move: Equatable {
     case insert(Index)

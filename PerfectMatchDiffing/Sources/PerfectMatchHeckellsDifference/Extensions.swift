@@ -1,9 +1,10 @@
 extension Collection {
   @inlinable
-  public var isNotEmpty: Bool { !isEmpty }
+  internal var isNotEmpty: Bool { !isEmpty }
 }
 
-public enum Either<T, U> {
+@usableFromInline
+internal enum Either<T, U> {
   case left(T)
   case right(U)
 }

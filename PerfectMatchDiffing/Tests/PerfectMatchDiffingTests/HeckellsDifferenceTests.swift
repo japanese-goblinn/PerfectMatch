@@ -20,8 +20,8 @@ internal final class PerfectMatchDiffingTests: XCTestCase {
       of: "🤡😎",
       and: "😎🤡"
     )
-    print(diff1.moves)
     XCTAssertEqual(diff1.moves.count, 2)
+    
     let diff2 = HeckellsDifference(
       of: [0, 1, 2, 3, 4, 5, 6, 7, 8],
       and: [0, 2, 3, 4, 7, 6, 9, 5, 10]
@@ -43,6 +43,15 @@ internal final class PerfectMatchDiffingTests: XCTestCase {
       and: "The men are bad. John likes the men. I hate the men"
     )
     XCTAssertEqual(diff5.moves.count, "John likes the men. ".count)
+    
+    let diff6 = HeckellsDifference(of: "", and: "ABCD")
+    XCTAssertEqual(diff6.moves.count, 4)
+    
+    let diff7 = HeckellsDifference(of: "ABCD", and: "")
+    XCTAssertEqual(diff7.moves.count, 4)
+    
+    let diff8 = HeckellsDifference(of: "", and: "")
+    XCTAssertTrue(diff8.moves.isEmpty)
   }
 
   internal func testCollectionDiffer() {
@@ -52,4 +61,14 @@ internal final class PerfectMatchDiffingTests: XCTestCase {
     let diff2 = HeckellsDifference(of: s1, and: s2)
     XCTAssertEqual(diff1.moves, diff2.moves)
   }
+  
+  /// current baseline: 0.101 s
+  internal func testPerformance() {
+    let s1 = String(repeating: "OABC", count: 10000).shuffled()
+    let s2 = String(repeating: "OABC", count: 10000).shuffled()
+    measure {
+      _ = HeckellsDifference(of: s1, and: s2)
+    }
+  }
+  
 }
