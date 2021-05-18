@@ -14,12 +14,6 @@ public struct ContentView: View {
           Image(systemSymbol: .gearshapeFill)
         }
       }
-      .frame(
-        minWidth: 700,
-        maxWidth: .infinity,
-        minHeight: 600,
-        maxHeight: .infinity
-      )
   }
   
   public init() {}
