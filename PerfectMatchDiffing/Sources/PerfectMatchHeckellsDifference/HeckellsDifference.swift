@@ -16,12 +16,14 @@ public struct HeckellsDifference<
     if old.isEmpty, new.isEmpty {
       return
     }
+    /// `indices` used here for the sake of performance
     if old.isNotEmpty, new.isEmpty {
       for (i, _) in old.indices.enumerated() {
         moves.append(.delete(i))
       }
       return
     }
+    /// `indices` used here for the sake of performance
     if old.isEmpty, new.isNotEmpty {
       for (i, _) in new.indices.enumerated() {
         moves.append(.insert(i))
@@ -31,12 +33,12 @@ public struct HeckellsDifference<
     
     let oldCount = old.count
     var table = [DiffableCollection.Element: ElementEntry](minimumCapacity: oldCount)
-    var oa = [Either<ElementEntry, Index>]()
+    var oa = [Either<Unmanaged<ElementEntry>, Index>]()
     oa.reserveCapacity(oldCount)
-    var na = [Either<ElementEntry, Index>]()
+    var na = [Either<Unmanaged<ElementEntry>, Index>]()
     na.reserveCapacity(new.count)
     
-    // 1
+    /// 1
     for element in new {
       let entry: ElementEntry
       if let existingEntry = table[element] {
@@ -46,37 +48,38 @@ public struct HeckellsDifference<
         table[element] = entry
       }
       entry.elementOcurrencesInN.increment()
-      na.append(.left(entry))
+      na.append(.left(.passUnretained(entry)))
     }
     
-    // 2
+    /// 2
+    /// not updating table element if element already exists in it is more efficient
     for (index, element) in old.enumerated() {
       if let existingEntry = table[element] {
         existingEntry.elementOcurrencesInO.increment()
         existingEntry.elementNumberInO.push(index)
-        oa.append(.left(existingEntry))
+        oa.append(.left(.passUnretained(existingEntry)))
       } else {
         let entry = ElementEntry()
         entry.elementOcurrencesInO.increment()
         entry.elementNumberInO.push(index)
-        oa.append(.left(entry))
+        oa.append(.left(.passUnretained(entry)))
         table[element] = entry
       }
     }
-    
-    // 3
+        
+    /// 3
     for (index, either) in na.enumerated() {
       guard
         case .left(let entry) = either,
-        entry.elementOcurrencesInN == .one,
-        entry.elementOcurrencesInO == .one,
-        let elementNumberInO = entry.elementNumberInO.pop()
+        entry._withUnsafeGuaranteedRef({ $0.elementOcurrencesInN == .one }),
+        entry._withUnsafeGuaranteedRef({ $0.elementOcurrencesInO == .one }),
+        let elementNumberInO = entry._withUnsafeGuaranteedRef({ $0.elementNumberInO.pop() })
       else { continue }
       na[index] = .right(elementNumberInO)
       oa[elementNumberInO] = .right(index)
     }
     
-    // 4
+    /// 4
     var i = 1
     while i < na.count - 1 {
       defer { i += 1 }
@@ -85,13 +88,13 @@ public struct HeckellsDifference<
         j + 1 < oa.count,
         case .left(let newEntry) = na[i + 1],
         case .left(let oldEntry) = oa[j + 1],
-        newEntry === oldEntry
+        newEntry._withUnsafeGuaranteedRef({ $0 }) === oldEntry._withUnsafeGuaranteedRef({ $0 })
       else { continue }
       na[i + 1] = .right(j + 1)
       oa[j + 1] = .right(i + 1)
     }
     
-    // 5
+    /// 5
     i = na.endIndex - 1
     while i > 0 {
       defer { i -= 1 }
@@ -100,13 +103,13 @@ public struct HeckellsDifference<
         j - 1 >= 0,
         case .left(let newEntry) = na[i - 1],
         case .left(let oldEntry) = oa[j - 1],
-        newEntry === oldEntry
+        newEntry._withUnsafeGuaranteedRef({ $0 }) === oldEntry._withUnsafeGuaranteedRef({ $0 })
       else { continue }
       na[i - 1] = .right(j - 1)
       oa[j - 1] = .right(i - 1)
     }
     
-    // final step
+    /// final step
     var deleteOffsets = Array(repeating: 0, count: old.count)
     var offset = 0
     for (index, element) in oa.enumerated() {

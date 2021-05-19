@@ -62,7 +62,7 @@ internal final class PerfectMatchDiffingTests: XCTestCase {
     XCTAssertEqual(diff1.moves, diff2.moves)
   }
   
-  /// current baseline: 0.101 s
+  /// current baseline: 0.097 s
   internal func testPerformance() {
     let s1 = String(repeating: "OABC", count: 10000).shuffled()
     let s2 = String(repeating: "OABC", count: 10000).shuffled()
