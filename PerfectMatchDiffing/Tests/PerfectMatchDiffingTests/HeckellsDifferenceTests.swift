@@ -52,6 +52,9 @@ internal final class PerfectMatchDiffingTests: XCTestCase {
     
     let diff8 = HeckellsDifference(of: "", and: "")
     XCTAssertTrue(diff8.moves.isEmpty)
+    
+    let diff9 = HeckellsDifference(of: "ABA", and: "ABA")
+    XCTAssertTrue(diff9.moves.isEmpty)
   }
 
   internal func testCollectionDiffer() {

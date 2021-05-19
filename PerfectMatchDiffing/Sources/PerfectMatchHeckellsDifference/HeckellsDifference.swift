@@ -30,6 +30,9 @@ public struct HeckellsDifference<
       }
       return
     }
+    if old.elementsEqual(new) {
+      return
+    }
     
     let oldCount = old.count
     var table = [DiffableCollection.Element: ElementEntry](minimumCapacity: oldCount)
