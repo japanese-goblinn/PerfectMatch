@@ -12,11 +12,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     )
   }
   
-  @objc func handleEvent(_ event: NSAppleEventDescriptor, and replyEvent: NSAppleEventDescriptor) {
+  @objc private func handleEvent(
+    _ event: NSAppleEventDescriptor,
+    and replyEvent: NSAppleEventDescriptor
+  ) {
     #warning("WIP")
     guard
-      let filesURLString = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue,
-      let queryItems = URLComponents(string: filesURLString)?.queryItems
+      let urlSchemeString = event.paramDescriptor(forKeyword: keyDirectObject)?.stringValue,
+      let url = URL(string: urlSchemeString),
+      url.absoluteString.hasPrefix("perfectmatch"),
+      url.host == "fileHandling",
+      let queryItems = URLComponents(url: url, resolvingAgainstBaseURL: true)?.queryItems
     else { return }
     for item in queryItems {
       print("\(item.name) : \(item.value)")
