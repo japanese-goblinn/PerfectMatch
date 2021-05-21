@@ -57,7 +57,7 @@ internal struct PerfectMatchCommand: ParsableCommand {
   @Argument(help: "First file to be compared")
   private var oldFile: String
   
-  @Argument(help: "Second file to be comapred")
+  @Argument(help: "Second file to be compared")
   private var newFile: String
   
   internal func run() throws {
