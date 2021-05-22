@@ -14,6 +14,7 @@ let package = Package(
   dependencies: [
     .package(name: "PerfectMatchResources", path: "../PerfectMatchResources"),
     .package(name: "PerfectMatchDiffing", path: "../PerfectMatchDiffing"),
+    .package(name: "PerfectMatchTextEditor", path: "../PerfectMatchTextEditor"),
     
     .package(name: "PerfectMatchDependencies", path: "../PerfectMatchDependencies")
   ],
@@ -23,8 +24,9 @@ let package = Package(
       dependencies: [
         .product(name: "PerfectMatchDiffing", package: "PerfectMatchDiffing"),
         .product(name: "PerfectMatchResources", package: "PerfectMatchResources"),
+        .product(name: "PerfectMatchTextEditor", package: "PerfectMatchTextEditor"),
         
-        .product(name: "PerfectMatchDependencies_Sourceful", package: "PerfectMatchDependencies")
+        .product(name: "PerfectMatchDependencies", package: "PerfectMatchDependencies")
       ]
     )
   ]

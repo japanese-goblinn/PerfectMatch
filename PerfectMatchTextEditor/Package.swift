@@ -4,15 +4,16 @@
 import PackageDescription
 
 let package = Package(
-  name: "PerfectMatchDependencies",
+  name: "PerfectMatchTextEditor",
   platforms: [.macOS(.v11)],
   products: [
-    .library(name: "PerfectMatchDependencies", targets: ["PerfectMatchDependencies"])
+    .library(name: "PerfectMatchTextEditor", targets: ["PerfectMatchTextEditor"]),
   ],
-  dependencies: [],
+  dependencies: [
+  ],
   targets: [
     .target(
-      name: "PerfectMatchDependencies",
+      name: "PerfectMatchTextEditor",
       dependencies: []
     ),
   ]
