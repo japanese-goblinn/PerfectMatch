@@ -10,120 +10,95 @@ import Foundation
 import CoreGraphics
 
 #if os(macOS)
-import AppKit
+  import AppKit
 #else
-import UIKit
+  import UIKit
 #endif
 
 protocol InnerTextViewDelegate: AnyObject {
   func didUpdateCursorFloatingState()
 }
 
-class InnerTextView: TextView {
+internal class InnerTextView: TextView {
   
-  weak var innerDelegate: InnerTextViewDelegate?
+  internal weak var innerDelegate: InnerTextViewDelegate?
   
-  var theme: SyntaxColorTheme?
+  internal var theme: SyntaxColorTheme?
   
-  var cachedParagraphs: [Paragraph]?
+  internal var cachedParagraphs: [Paragraph]?
   
-  func invalidateCachedParagraphs() {
+  internal func invalidateCachedParagraphs() {
     cachedParagraphs = nil
   }
   
-  func hideGutter() {
+  internal func hideGutter() {
     gutterWidth = theme?.gutterStyle.minimumWidth ?? 0.0
   }
   
-  func updateGutterWidth(for numberOfCharacters: Int) {
-    
+  internal func updateGutterWidth(for numberOfCharacters: Int) {
     let leftInset: CGFloat = 4.0
     let rightInset: CGFloat = 4.0
-    
     let charWidth: CGFloat = 10.0
-    
-    gutterWidth = max(theme?.gutterStyle.minimumWidth ?? 0.0, CGFloat(numberOfCharacters) * charWidth + leftInset + rightInset)
-    
+    gutterWidth = max(
+      theme?.gutterStyle.minimumWidth ?? 0.0,
+      CGFloat(numberOfCharacters) * charWidth + leftInset + rightInset
+    )
   }
   
   #if os(iOS)
-  
-  var isCursorFloating = false
-  
-  override func beginFloatingCursor(at point: CGPoint) {
-    super.beginFloatingCursor(at: point)
+    internal var isCursorFloating = false
     
-    isCursorFloating = true
-    innerDelegate?.didUpdateCursorFloatingState()
-    
-  }
-  
-  override func endFloatingCursor() {
-    super.endFloatingCursor()
-    
-    isCursorFloating = false
-    innerDelegate?.didUpdateCursorFloatingState()
-    
-  }
-  
-  override public func draw(_ rect: CGRect) {
-    
-    guard let theme = theme else {
-      super.draw(rect)
-      hideGutter()
-      return
+    internal override func beginFloatingCursor(at point: CGPoint) {
+      super.beginFloatingCursor(at: point)
+      self.isCursorFloating = true
+      self.innerDelegate?.didUpdateCursorFloatingState()
     }
     
-    let textView = self
-    
-    if theme.lineNumbersStyle == nil  {
-      
-      hideGutter()
-      
-      let gutterRect = CGRect(x: 0, y: rect.minY, width: textView.gutterWidth, height: rect.height)
-      let path = BezierPath(rect: gutterRect)
-      path.fill()
-      
-    } else {
-      
-      let components = textView.text.components(separatedBy: .newlines)
-      
-      let count = components.count
-      
-      let maxNumberOfDigits = "\(count)".count
-      
-      textView.updateGutterWidth(for: maxNumberOfDigits)
-      
-      var paragraphs: [Paragraph]
-      
-      if let cached = textView.cachedParagraphs {
-        
-        paragraphs = cached
-        
-      } else {
-        
-        paragraphs = generateParagraphs(for: textView, flipRects: false)
-        textView.cachedParagraphs = paragraphs
-        
+    internal override func endFloatingCursor() {
+      super.endFloatingCursor()
+      self.isCursorFloating = false
+      self.innerDelegate?.didUpdateCursorFloatingState()
+    }
+  
+    internal override func draw(_ rect: CGRect) {
+      guard let theme = theme else {
+        super.draw(rect)
+        return hideGutter()
       }
       
-      theme.gutterStyle.backgroundColor.setFill()
-      
-      let gutterRect = CGRect(x: 0, y: rect.minY, width: textView.gutterWidth, height: rect.height)
-      let path = BezierPath(rect: gutterRect)
-      path.fill()
-      
-      drawLineNumbers(paragraphs, in: rect, for: self)
-      
+      let textView = self
+
+      if theme.lineNumbersStyle == nil  {
+        hideGutter()
+        let gutterRect = CGRect(x: 0, y: rect.minY, width: textView.gutterWidth, height: rect.height)
+        let path = BezierPath(rect: gutterRect)
+        path.fill()
+      } else {
+        let components = textView.text.components(separatedBy: .newlines)
+        let count = components.count
+        let maxNumberOfDigits = "\(count)".count
+        textView.updateGutterWidth(for: maxNumberOfDigits)
+        
+        var paragraphs: [Paragraph]
+        if let cached = textView.cachedParagraphs {
+          paragraphs = cached
+        } else {
+          paragraphs = generateParagraphs(for: textView, flipRects: false)
+          textView.cachedParagraphs = paragraphs
+        }
+        
+        theme.gutterStyle.backgroundColor.setFill()
+        let gutterRect = CGRect(x: 0, y: rect.minY, width: textView.gutterWidth, height: rect.height)
+        let path = BezierPath(rect: gutterRect)
+        path.fill()
+        drawLineNumbers(paragraphs, in: rect, for: self)
+      }
+    
+      super.draw(rect)
     }
-    
-    
-    super.draw(rect)
-    
-  }
   #endif
   
-  var gutterWidth: CGFloat {
+  internal var gutterWidth: CGFloat {
     set {
       #if os(macOS)
         textContainerInset = NSSize(width: newValue, height: 0)
@@ -142,22 +117,17 @@ class InnerTextView: TextView {
   }
   
   #if os(iOS)
-    override func caretRect(for position: UITextPosition) -> CGRect {
-      
+    internal override func caretRect(for position: UITextPosition) -> CGRect {
       var superRect = super.caretRect(for: position)
-      
       guard let theme = theme else {
         return superRect
       }
-      
       let font = theme.font
       
       // "descender" is expressed as a negative value,
       // so to add its height you must subtract its value
       superRect.size.height = font.pointSize - font.descender
-
       return superRect
     }
   #endif
-  
 }

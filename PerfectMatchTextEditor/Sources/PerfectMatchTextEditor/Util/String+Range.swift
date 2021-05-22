@@ -8,10 +8,8 @@
 
 import Foundation
 
-extension String {
-	
+internal extension String {
 	func nsRange(fromRange range: Range<Index>) -> NSRange {
-		return NSRange(range, in: self)
+    return .init(range, in: self)
 	}
-
 }

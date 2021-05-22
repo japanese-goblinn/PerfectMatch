@@ -10,38 +10,35 @@ import Foundation
 import CoreGraphics
 
 #if os(macOS)
-	import AppKit
+  import AppKit
 #else
-	import UIKit
+  import UIKit
 #endif
 
-struct Paragraph {
-	
-	var rect: CGRect
-	let number: Int
-	
-	var string: String {
-		return "\(number)"
-	}
-	
-	func attributedString(for style: LineNumbersStyle) -> NSAttributedString {
-		
-		let attr = NSMutableAttributedString(string: string)
-		let range = NSMakeRange(0, attr.length)
-		
-		let attributes: [NSAttributedString.Key: Any] = [
-			.font: style.font,
-			.foregroundColor : style.textColor
-		]
-		
-		attr.addAttributes(attributes, range: range)
-		
-		return attr
-	}
-	
-	func drawSize(for style: LineNumbersStyle) -> CGSize {
-		return attributedString(for: style).size()
-	}
-	
+internal struct Paragraph {
+  internal var rect: CGRect
+  internal let number: Int
+  
+  internal var string: String { "\(number)" }
+  
+  internal func attributedString(for style: LineNumbersStyle) -> NSAttributedString {
+    let attributedString = NSMutableAttributedString(string: string)
+    
+    let attributes: [NSAttributedString.Key: Any] = [
+      .font: style.font,
+      .foregroundColor : style.textColor
+    ]
+    attributedString.addAttributes(
+      attributes,
+      range: NSMakeRange(0, attributedString.length)
+    )
+    
+    return attributedString
+  }
+  
+  internal func drawSize(for style: LineNumbersStyle) -> CGSize {
+    return attributedString(for: style).size()
+  }
+  
 }
 

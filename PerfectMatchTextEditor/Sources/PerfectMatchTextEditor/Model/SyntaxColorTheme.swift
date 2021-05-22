@@ -10,7 +10,6 @@ import Foundation
 import CoreGraphics
 
 public struct LineNumbersStyle {
-	
 	public let font: Font
 	public let textColor: Color
 	
@@ -18,11 +17,9 @@ public struct LineNumbersStyle {
 		self.font = font
 		self.textColor = textColor
 	}
-
 }
 
 public struct GutterStyle {
-
 	public let backgroundColor: Color
 
 	/// If line numbers are displayed, the gutter width adapts to fit all line numbers.
@@ -37,17 +34,11 @@ public struct GutterStyle {
 }
 
 public protocol SyntaxColorTheme {
-	
 	/// Nil hides line numbers.
 	var lineNumbersStyle: LineNumbersStyle? { get }
-	
 	var gutterStyle: GutterStyle { get }
-	
 	var font: Font { get }
-	
 	var backgroundColor: Color { get }
-
 	func globalAttributes() -> [NSAttributedString.Key: Any]
-
 	func attributes(for token: Token) -> [NSAttributedString.Key: Any]
 }

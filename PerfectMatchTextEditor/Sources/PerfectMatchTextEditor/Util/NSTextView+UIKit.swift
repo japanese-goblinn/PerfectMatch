@@ -7,29 +7,17 @@
 //
 
 #if os(macOS)
+  import AppKit
 
-import AppKit
-
-extension NSTextView {
-	
-	var text: String! {
-		get {
-			return string
-		}
-		set {
-			self.string = newValue
-		}
-	}
-	
-	var tintColor: Color {
-		set {
-			insertionPointColor = newValue
-		}
-		get {
-			return insertionPointColor
-		}
-	}
-	
-}
-
+  internal extension NSTextView {
+    var text: String! {
+      get { string }
+      set { string = newValue }
+    }
+    
+    var tintColor: Color {
+      get { insertionPointColor }
+      set { insertionPointColor = newValue }
+    }
+  }
 #endif

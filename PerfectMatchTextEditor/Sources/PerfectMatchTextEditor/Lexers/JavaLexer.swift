@@ -7,10 +7,9 @@
 
 import Foundation
 
-internal class JavaLexer: SourceCodeRegexLexer {
-    
-  internal lazy var generators: [TokenGenerator] = {
-    
+public class JavaLexer: SourceCodeRegexLexer {
+  
+  public lazy var generators: [TokenGenerator] = {
     var generators = [TokenGenerator?]()
     
     // Functions
@@ -45,8 +44,10 @@ internal class JavaLexer: SourceCodeRegexLexer {
     return generators.compactMap( { $0 })
   }()
   
-  internal func generators(source: String) -> [TokenGenerator] {
+  public func generators(source: String) -> [TokenGenerator] {
     return generators
   }
+    
+  public init() {}
   
 }
