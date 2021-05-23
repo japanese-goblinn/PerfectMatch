@@ -1,20 +1,24 @@
 import PerfectMatchUI
+import Combine
+
+final class AppStore: ObservableObject {
+  var subscribtion: Set<AnyCancellable> = .init()
+  
+  init() {}
+}
 
 @main
 struct PerfectMatchApp: App {
+  @NSApplicationDelegateAdaptor var appDelegate: AppDelegate
   
-  @NSApplicationDelegateAdaptor
-  var appDelegate: AppDelegate
-  
+  @StateObject var appStore = AppStore()
+
   var body: some Scene {
     WindowGroup {
       ContentView()
-        .frame(
-          minWidth: 700,
-          maxWidth: .infinity,
-          minHeight: 600,
-          maxHeight: .infinity
-        )
+    }
+    Settings {
+      SettingsView()
     }
   }
 }

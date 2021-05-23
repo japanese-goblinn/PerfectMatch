@@ -8,6 +8,7 @@ extension Image {
 
 public extension SFSymbol {
   static var gearshapeFill: Self { .init(name: "gearshape.fill") }
+  static var textAlignedLeft: Self { .init(name: "text.alignleft") }
 }
 
 public struct SFSymbol {

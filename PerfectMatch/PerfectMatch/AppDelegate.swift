@@ -1,9 +1,8 @@
 import PerfectMatchUI
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
-
+  
   func applicationDidFinishLaunching(_ notification: Notification) {
-    #warning("WIP")
     NSAppleEventManager.shared().setEventHandler(
       self,
       andSelector: #selector(handleEvent(_:and:)),

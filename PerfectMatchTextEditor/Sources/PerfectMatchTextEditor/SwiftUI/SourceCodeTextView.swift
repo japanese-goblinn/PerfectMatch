@@ -17,15 +17,17 @@ import Foundation
 #endif
 
 
-public struct SourceCodeTextEditor: _ViewRepresentable {
+public struct SourceCodeTextView: _ViewRepresentable {
   
   @Binding private var text: String
   
   private var shouldBecomeFirstResponder: Bool
-  private var custom: Customization
+  private var isEditable: Bool
+  private var customisation: Customization
   
   public init(
     text: Binding<String>,
+    isEditable: Bool = true,
     customization: Customization = .init(
       didChangeText: {_ in },
       insertionPointColor: { .white },
@@ -36,7 +38,8 @@ public struct SourceCodeTextEditor: _ViewRepresentable {
     shouldBecomeFirstResponder: Bool = false
   ) {
     self._text = text
-    self.custom = customization
+    self.isEditable = isEditable
+    self.customisation = customization
     self.shouldBecomeFirstResponder = shouldBecomeFirstResponder
   }
   
@@ -48,7 +51,7 @@ public struct SourceCodeTextEditor: _ViewRepresentable {
     public func makeUIView(context: Context) -> SyntaxTextView {
       let wrappedView = SyntaxTextView()
       wrappedView.delegate = context.coordinator
-      wrappedView.theme = custom.theme()
+      wrappedView.theme = customisation.theme()
       
       context.coordinator.wrappedView = wrappedView
       context.coordinator.wrappedView.text = text
@@ -65,13 +68,15 @@ public struct SourceCodeTextEditor: _ViewRepresentable {
   #if os(macOS)
     public func makeNSView(context: Context) -> SyntaxTextView {
       let wrappedView = SyntaxTextView()
-      wrappedView.delegate = context.coordinator
-      wrappedView.theme = custom.theme()
-      wrappedView.contentTextView.insertionPointColor = custom.insertionPointColor()
+      let coordinator = context.coordinator
       
-      context.coordinator.wrappedView = wrappedView
-      context.coordinator.wrappedView.text = text
+      wrappedView.delegate = coordinator
+      wrappedView.theme = customisation.theme()
+      wrappedView.contentTextView.insertionPointColor = customisation.insertionPointColor()
+      wrappedView.text = text
+      wrappedView.textView.isEditable = isEditable
       
+      coordinator.wrappedView = wrappedView
       return wrappedView
     }
     
@@ -79,17 +84,18 @@ public struct SourceCodeTextEditor: _ViewRepresentable {
   #endif
 }
 
-extension SourceCodeTextEditor {
+extension SourceCodeTextView {
   public class Coordinator: SyntaxTextViewDelegate {
-    internal let parent: SourceCodeTextEditor
+    
+    internal let parent: SourceCodeTextView
     internal var wrappedView: SyntaxTextView!
     
-    init(_ parent: SourceCodeTextEditor) {
+    init(_ parent: SourceCodeTextView) {
       self.parent = parent
     }
     
     public func lexerForSource(_ source: String) -> Lexer {
-      parent.custom.lexerForSource(source)
+      parent.customisation.lexerForSource(source)
     }
     
     public func didChangeText(_ syntaxTextView: SyntaxTextView) {
@@ -97,22 +103,22 @@ extension SourceCodeTextEditor {
         self.parent.text = syntaxTextView.text
       }
       // allow the client to decide on thread
-      parent.custom.didChangeText(parent)
+      parent.customisation.didChangeText(parent)
     }
     
     public func textViewDidBeginEditing(_ syntaxTextView: SyntaxTextView) {
-      parent.custom.textViewDidBeginEditing(parent)
+      parent.customisation.textViewDidBeginEditing(parent)
     }
   }
 }
 #endif
 
-extension SourceCodeTextEditor {
+extension SourceCodeTextView {
   public struct Customization {
-    internal var didChangeText: (SourceCodeTextEditor) -> Void
+    internal var didChangeText: (SourceCodeTextView) -> Void
     internal var insertionPointColor: () -> Color
     internal var lexerForSource: (String) -> Lexer
-    internal var textViewDidBeginEditing: (SourceCodeTextEditor) -> Void
+    internal var textViewDidBeginEditing: (SourceCodeTextView) -> Void
     internal var theme: () -> SourceCodeTheme
     
     /// Creates a **Customization** to pass into the *init()* of a **SourceCodeTextEditor**.
@@ -124,10 +130,10 @@ extension SourceCodeTextEditor {
     ///     - textViewDidBeginEditing: A SyntaxTextView delegate action.
     ///     - theme: Custom theme (default: DefaultSourceCodeTheme()).
     public init(
-      didChangeText: @escaping (SourceCodeTextEditor) -> Void,
+      didChangeText: @escaping (SourceCodeTextView) -> Void,
       insertionPointColor: @escaping () -> Color,
       lexerForSource: @escaping (String) -> Lexer,
-      textViewDidBeginEditing: @escaping (SourceCodeTextEditor) -> Void,
+      textViewDidBeginEditing: @escaping (SourceCodeTextView) -> Void,
       theme: @escaping () -> SourceCodeTheme
     ) {
       self.didChangeText = didChangeText
