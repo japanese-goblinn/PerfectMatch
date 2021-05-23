@@ -29,7 +29,7 @@ public struct SourceCodeTextEditor: _ViewRepresentable {
     customization: Customization = .init(
       didChangeText: {_ in },
       insertionPointColor: { .white },
-      lexerForSource: { _ in SwiftLexer() },
+      lexerForSource: { _ in ShellLexer() },
       textViewDidBeginEditing: { _ in },
       theme: { DefaultSourceCodeTheme() }
     ),
