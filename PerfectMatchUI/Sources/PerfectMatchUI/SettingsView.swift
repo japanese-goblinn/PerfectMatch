@@ -2,7 +2,7 @@ import SwiftUI
 
 public struct SettingsView: View {
   public var body: some View {
-    Text("Settings")
+    Text("🏗 WORK IN PROGRESS")
       .padding()
       .frame(width: 300)
   }
