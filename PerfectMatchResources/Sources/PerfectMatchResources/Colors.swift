@@ -25,4 +25,5 @@ public struct ColorResource {
 public extension ColorResource {
   static var primaryGreen: Self { .init(name: "PrimaryGreen") }
   static var primaryRed: Self { .init(name: "PrimaryRed") }
+  static var darkThemeBackground: Self { .init(name: "DarkThemeBackground") }
 }

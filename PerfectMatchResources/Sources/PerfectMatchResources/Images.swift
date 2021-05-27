@@ -9,6 +9,8 @@ extension Image {
 public extension SFSymbol {
   static var gearshapeFill: Self { .init(name: "gearshape.fill") }
   static var textAlignedLeft: Self { .init(name: "text.alignleft") }
+  static var xmarkSquareFill: Self { .init(name: "xmark.square.fill") }
+  static var doc: Self { .init(name: "doc") }
 }
 
 public struct SFSymbol {
