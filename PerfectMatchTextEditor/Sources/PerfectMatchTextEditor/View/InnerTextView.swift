@@ -27,6 +27,10 @@ internal class InnerTextView: TextView {
   
   internal var cachedParagraphs: [Paragraph]?
   
+  #if os(macOS)
+    override var acceptableDragTypes: [NSPasteboard.PasteboardType] { .init() }
+  #endif
+  
   internal func invalidateCachedParagraphs() {
     cachedParagraphs = nil
   }
@@ -36,13 +40,13 @@ internal class InnerTextView: TextView {
   }
   
   internal func updateGutterWidth(for numberOfCharacters: Int) {
-    let leftInset: CGFloat = 4.0
-    let rightInset: CGFloat = 4.0
-    let charWidth: CGFloat = 10.0
-    gutterWidth = max(
-      theme?.gutterStyle.minimumWidth ?? 0.0,
-      CGFloat(numberOfCharacters) * charWidth + leftInset + rightInset
-    )
+//    let leftInset: CGFloat = 4.0
+//    let rightInset: CGFloat = 4.0
+//    let charWidth: CGFloat = 10.0
+//    gutterWidth = max(
+//      theme?.gutterStyle.minimumWidth ?? 0.0,
+//      CGFloat(numberOfCharacters) * charWidth + leftInset + rightInset
+//    )
   }
   
   #if os(iOS)
@@ -87,7 +91,7 @@ internal class InnerTextView: TextView {
           textView.cachedParagraphs = paragraphs
         }
         
-        theme.gutterStyle.backgroundColor.setFill()
+//        theme.gutterStyle.backgroundColor.setFill()
         let gutterRect = CGRect(x: 0, y: rect.minY, width: textView.gutterWidth, height: rect.height)
         let path = BezierPath(rect: gutterRect)
         path.fill()

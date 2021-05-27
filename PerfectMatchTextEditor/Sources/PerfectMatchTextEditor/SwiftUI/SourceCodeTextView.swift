@@ -5,19 +5,9 @@
 //
 
 import Foundation
+import SwiftUI
 
-#if canImport(SwiftUI)
-  import SwiftUI
-#if os(macOS)
-  public typealias _ViewRepresentable = NSViewRepresentable
-#endif
-
-#if os(iOS)
-  public typealias _ViewRepresentable = UIViewRepresentable
-#endif
-
-
-public struct SourceCodeTextView: _ViewRepresentable {
+public struct SourceCodeTextView: NSViewRepresentable {
   
   @Binding private var text: String
   
@@ -29,11 +19,7 @@ public struct SourceCodeTextView: _ViewRepresentable {
     text: Binding<String>,
     isEditable: Bool = true,
     customization: Customization = .init(
-      didChangeText: {_ in },
-      insertionPointColor: { .white },
-      lexerForSource: { _ in ShellLexer() },
-      textViewDidBeginEditing: { _ in },
-      theme: { DefaultSourceCodeTheme() }
+      lexerForSource: { ShellLexer() }
     ),
     shouldBecomeFirstResponder: Bool = false
   ) {
@@ -47,100 +33,70 @@ public struct SourceCodeTextView: _ViewRepresentable {
     return .init(self)
   }
   
-  #if os(iOS)
-    public func makeUIView(context: Context) -> SyntaxTextView {
-      let wrappedView = SyntaxTextView()
-      wrappedView.delegate = context.coordinator
-      wrappedView.theme = customisation.theme()
-      
-      context.coordinator.wrappedView = wrappedView
-      context.coordinator.wrappedView.text = text
-      
-      return wrappedView
-    }
+  public func makeNSView(context: Context) -> SyntaxTextView {
+    let wrappedView = SyntaxTextView()
+    let coordinator = context.coordinator
+    let environment = context.environment
     
-    public func updateUIView(_ view: SyntaxTextView, context: Context) {
-      guard shouldBecomeFirstResponder else { return }
-      view.becomeFirstResponder()
-    }
-  #endif
-  
-  #if os(macOS)
-    public func makeNSView(context: Context) -> SyntaxTextView {
-      let wrappedView = SyntaxTextView()
-      let coordinator = context.coordinator
-      
-      wrappedView.delegate = coordinator
-      wrappedView.theme = customisation.theme()
-      wrappedView.contentTextView.insertionPointColor = customisation.insertionPointColor()
-      wrappedView.text = text
-      wrappedView.textView.isEditable = isEditable
-      
-      coordinator.wrappedView = wrappedView
-      return wrappedView
-    }
+    wrappedView.text = text
+    wrappedView.textView.delegate = context.coordinator
+    wrappedView.delegate = context.coordinator
+    coordinator.representableView = wrappedView
+    
+    wrappedView.contentTextView.isEditable = isEditable
+    wrappedView.theme =
+      environment.colorScheme == .light ? LightTheme() : DarkTheme()
+    wrappedView.contentTextView.insertionPointColor =
+      environment.colorScheme == .light ? .black : .white
+    wrappedView.scrollView.verticalScroller?.knobStyle =
+      environment.colorScheme == .light ? .dark : .light
+    return wrappedView
+//    wrappedView.updateLine(0, with: .asset(.primaryRed))
+  }
     
     public func updateNSView(_ view: SyntaxTextView, context: Context) {}
-  #endif
 }
 
 extension SourceCodeTextView {
-  public class Coordinator: SyntaxTextViewDelegate {
+  public class Coordinator: NSObject, SyntaxTextViewDelegate, NSTextViewDelegate {
+    internal let swiftUIView: SourceCodeTextView
+    internal var representableView: SyntaxTextView!
     
-    internal let parent: SourceCodeTextView
-    internal var wrappedView: SyntaxTextView!
-    
-    init(_ parent: SourceCodeTextView) {
-      self.parent = parent
+    init(_ swiftUIView: SourceCodeTextView) {
+      self.swiftUIView = swiftUIView
     }
     
     public func lexerForSource(_ source: String) -> Lexer {
-      parent.customisation.lexerForSource(source)
+      swiftUIView.customisation.lexerForSource()
     }
     
     public func didChangeText(_ syntaxTextView: SyntaxTextView) {
       DispatchQueue.main.async {
-        self.parent.text = syntaxTextView.text
+        self.swiftUIView.text = syntaxTextView.text
       }
-      // allow the client to decide on thread
-      parent.customisation.didChangeText(parent)
+      swiftUIView.customisation.didChangeText?(swiftUIView)
     }
     
-    public func textViewDidBeginEditing(_ syntaxTextView: SyntaxTextView) {
-      parent.customisation.textViewDidBeginEditing(parent)
+    public func textDidBeginEditing(_ notification: Notification) {
+      swiftUIView.customisation.textViewDidBeginEditing?(swiftUIView)
     }
   }
 }
-#endif
 
 extension SourceCodeTextView {
   public struct Customization {
-    internal var didChangeText: (SourceCodeTextView) -> Void
-    internal var insertionPointColor: () -> Color
-    internal var lexerForSource: (String) -> Lexer
-    internal var textViewDidBeginEditing: (SourceCodeTextView) -> Void
-    internal var theme: () -> SourceCodeTheme
+    internal let lexerForSource: () -> Lexer
+    internal let didChangeText: ((SourceCodeTextView) -> Void)?
+    internal let textViewDidBeginEditing: ((SourceCodeTextView) -> Void)?
     
-    /// Creates a **Customization** to pass into the *init()* of a **SourceCodeTextEditor**.
-    ///
-    /// - Parameters:
-    ///     - didChangeText: A SyntaxTextView delegate action.
-    ///     - lexerForSource: The lexer to use (default: SwiftLexer()).
-    ///     - insertionPointColor: To customize color of insertion point caret (default: .white).
-    ///     - textViewDidBeginEditing: A SyntaxTextView delegate action.
-    ///     - theme: Custom theme (default: DefaultSourceCodeTheme()).
     public init(
-      didChangeText: @escaping (SourceCodeTextView) -> Void,
-      insertionPointColor: @escaping () -> Color,
-      lexerForSource: @escaping (String) -> Lexer,
-      textViewDidBeginEditing: @escaping (SourceCodeTextView) -> Void,
-      theme: @escaping () -> SourceCodeTheme
+      lexerForSource: @escaping () -> Lexer,
+      didChangeText: ((SourceCodeTextView) -> Void)? = nil,
+      textViewDidBeginEditing: ((SourceCodeTextView) -> Void)? = nil
     ) {
-      self.didChangeText = didChangeText
-      self.insertionPointColor = insertionPointColor
       self.lexerForSource = lexerForSource
+      self.didChangeText = didChangeText
       self.textViewDidBeginEditing = textViewDidBeginEditing
-      self.theme = theme
     }
   }
 }

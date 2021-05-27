@@ -124,8 +124,8 @@ open class SyntaxTextView: _View {
   #endif
   
   private func setup() {
-    
-    textView.gutterWidth = 20
+
+//    textView.gutterWidth = 20
     
     #if os(iOS)
     
@@ -182,9 +182,7 @@ open class SyntaxTextView: _View {
     
     textView.textContainer?.containerSize = NSSize(width: self.bounds.width, height: .greatestFiniteMagnitude)
     textView.textContainer?.widthTracksTextView = true
-    
-    //			textView.layerContentsRedrawPolicy = .beforeViewResize
-    
+        
     wrapperView.textView = textView
     
     #else
@@ -214,36 +212,28 @@ open class SyntaxTextView: _View {
     textView.text = ""
     
     #if os(iOS)
-    
-    textView.autocapitalizationType = .none
-    textView.keyboardType = .default
-    textView.autocorrectionType = .no
-    textView.spellCheckingType = .no
-    
-    if #available(iOS 11.0, *) {
-      textView.smartQuotesType = .no
-      textView.smartInsertDeleteType = .no
-    }
-    
-    self.clipsToBounds = true
-    
+      textView.autocapitalizationType = .none
+      textView.keyboardType = .default
+      textView.autocorrectionType = .no
+      textView.spellCheckingType = .no
+      
+      if #available(iOS 11.0, *) {
+        textView.smartQuotesType = .no
+        textView.smartInsertDeleteType = .no
+      }
+      
+      self.clipsToBounds = true
     #endif
-    
   }
   
   #if os(macOS)
-  
-  open override func viewDidMoveToSuperview() {
-    super.viewDidMoveToSuperview()
+    open override func viewDidMoveToSuperview() {
+      super.viewDidMoveToSuperview()
+    }
     
-  }
-  
-  @objc func didScroll(_ notification: Notification) {
-    
-    wrapperView.setNeedsDisplay(wrapperView.bounds)
-    
-  }
-  
+    @objc func didScroll(_ notification: Notification) {
+      wrapperView.setNeedsDisplay(wrapperView.bounds)
+    }
   #endif
   
   // MARK: -
@@ -286,6 +276,30 @@ open class SyntaxTextView: _View {
   }
   
   // MARK: -
+  public func updateLine(
+    _ lineNumber: Int,
+    with color: Color
+  ) {
+    guard let layoutManager = textView.layoutManager else { return }
+    var numberOfLines = 0
+    var indexOfGlyph = 0
+    var range: NSRange = .init()
+    while indexOfGlyph < layoutManager.numberOfGlyphs {
+      layoutManager.lineFragmentRect(forGlyphAt: indexOfGlyph, effectiveRange: &range)
+      if numberOfLines == lineNumber {
+        DispatchQueue.main.async {
+          layoutManager.removeTemporaryAttribute(.backgroundColor, forCharacterRange: range)
+          layoutManager.addTemporaryAttributes(
+            [.backgroundColor: color],
+            forCharacterRange: range
+          )
+        }
+        break
+      }
+      indexOfGlyph = NSMaxRange(range)
+      numberOfLines += 1
+    }
+  }
   
   public func insertText(_ text: String) {
     if shouldChangeText(insertingText: text) {

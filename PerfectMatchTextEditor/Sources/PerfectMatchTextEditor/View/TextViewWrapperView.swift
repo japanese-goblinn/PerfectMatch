@@ -15,27 +15,20 @@ import Foundation
 #endif
 
 #if os(macOS)
-	
 	class TextViewWrapperView: _View {
 		
-		override func hitTest(_ point: NSPoint) -> NSView? {
-			// Disable interaction, so we're not blocking the text view.
-			return nil
-		}
+    // Disable interaction, so we're not blocking the text view.
+    override func hitTest(_ point: NSPoint) -> NSView? { return nil }
 		
 		override func layout() {
 			super.layout()
-			
 			self.setNeedsDisplay(self.bounds)
 		}
 		
 		override func resize(withOldSuperviewSize oldSize: NSSize) {
 			super.resize(withOldSuperviewSize: oldSize)
-			
 			self.textView?.invalidateCachedParagraphs()
-
 			self.setNeedsDisplay(self.bounds)
-			
 		}
 		
 		var textView: InnerTextView?
@@ -53,54 +46,35 @@ import Foundation
 			}
 			
 			if theme.lineNumbersStyle == nil {
-
 				textView.hideGutter()
-				
 				let gutterRect = CGRect(x: 0, y: rect.minY, width: textView.gutterWidth, height: rect.height)
 				let path = BezierPath(rect: gutterRect)
 				path.fill()
-				
 			} else {
-			
 				let contentHeight = textView.enclosingScrollView!.documentView!.bounds.height
-			
 				let yOffset = self.bounds.height - contentHeight
-			
 				var paragraphs: [Paragraph]
-			
 				if let cached = textView.cachedParagraphs {
-					
 					paragraphs = cached
-					
 				} else {
-					
 					paragraphs = generateParagraphs(for: textView, flipRects: true)
 					textView.cachedParagraphs = paragraphs
-					
 				}
-			
 				paragraphs = offsetParagraphs(paragraphs, for: textView, yOffset: yOffset)
-			
-				let components = textView.text.components(separatedBy: .newlines)
-			
+				
+        let components = textView.text.components(separatedBy: .newlines)
 				let count = components.count
-			
 				let maxNumberOfDigits = "\(count)".count
-			
-				textView.updateGutterWidth(for: maxNumberOfDigits)
-			
+				
+        textView.updateGutterWidth(for: maxNumberOfDigits)
 				theme.gutterStyle.backgroundColor.setFill()
-			
-				let gutterRect = CGRect(x: 0, y: 0, width: textView.gutterWidth, height: rect.height)
+				
+        let gutterRect = CGRect(x: 0, y: 0, width: textView.gutterWidth, height: rect.height)
 				let path = BezierPath(rect: gutterRect)
 				path.fill()
 			
 				drawLineNumbers(paragraphs, in: rect, for: textView)
-			
 			}
-			
 		}
-		
 	}
-	
 #endif
