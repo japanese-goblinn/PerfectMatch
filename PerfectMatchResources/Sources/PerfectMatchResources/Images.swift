@@ -1,22 +1,36 @@
 import SwiftUI
 
-extension Image {
-  public init(systemSymbol: SFSymbol) {
-    self = .init(systemName: systemSymbol.name)
-  }
+public extension SFSymbol {
+  @inlinable static var gearshape: Self { .init(name: "gearshape") }
+  @inlinable static var textAlignedLeft: Self { .init(name: "text.alignleft") }
+  @inlinable static var xmarkSquare: Self { .init(name: "xmark.square") }
+  @inlinable static var docText: Self { .init(name: "doc.text") }
+  @inlinable static var xmarkCircle: Self { .init(name: "xmark.circle") }
+  @inlinable static var xmark: Self { .init(name: "xmark") }
 }
 
 public extension SFSymbol {
-  static var gearshapeFill: Self { .init(name: "gearshape.fill") }
-  static var textAlignedLeft: Self { .init(name: "text.alignleft") }
-  static var xmarkSquareFill: Self { .init(name: "xmark.square.fill") }
-  static var doc: Self { .init(name: "doc") }
+  @inlinable
+  func filled() -> Self {
+    return .init(name: name.appending(".fill"))
+  }
+  
 }
 
+public enum Fillable {}
+public enum NonFillable {}
+
 public struct SFSymbol {
-  public let name: String
+  @usableFromInline
+  internal let name: String
 
   public init(name: String) {
     self.name = name
+  }
+}
+
+public extension Image {
+  init(systemSymbol: SFSymbol) {
+    self = .init(systemName: systemSymbol.name)
   }
 }
