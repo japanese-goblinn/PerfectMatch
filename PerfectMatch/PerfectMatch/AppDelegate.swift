@@ -1,7 +1,6 @@
 import PerfectMatchUI
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
-  
   func applicationDidFinishLaunching(_ notification: Notification) {
     NSAppleEventManager.shared().setEventHandler(
       self,
