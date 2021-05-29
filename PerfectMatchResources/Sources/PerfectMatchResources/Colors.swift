@@ -2,6 +2,12 @@ import AppKit
 import SwiftUI
 import Foundation
 
+public extension ColorResource {
+  @inlinable static var primaryGreen: Self { .init(name: "PrimaryGreen") }
+  @inlinable static var primaryRed: Self { .init(name: "PrimaryRed") }
+  @inlinable static var darkThemeBackground: Self { .init(name: "DarkThemeBackground") }
+}
+
 public extension Color {
   static func asset(_ color: ColorResource) -> Self {
     return .init(color.name, bundle: .module)
@@ -21,13 +27,8 @@ public extension NSColor {
 public struct ColorResource {
   public let name: String
 
+  @usableFromInline
   internal init(name: String) {
     self.name = name
   }
-}
-
-public extension ColorResource {
-  static var primaryGreen: Self { .init(name: "PrimaryGreen") }
-  static var primaryRed: Self { .init(name: "PrimaryRed") }
-  static var darkThemeBackground: Self { .init(name: "DarkThemeBackground") }
 }
