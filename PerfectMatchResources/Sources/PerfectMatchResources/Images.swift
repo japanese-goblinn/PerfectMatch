@@ -9,16 +9,13 @@ public extension SFSymbol {
   @inlinable static var xmark: Self { .init(name: "xmark") }
 }
 
+#warning("Potential error. Can be applied to symbols that did not have filled version")
 public extension SFSymbol {
   @inlinable
   func filled() -> Self {
     return .init(name: name.appending(".fill"))
   }
-  
 }
-
-public enum Fillable {}
-public enum NonFillable {}
 
 public struct SFSymbol {
   @usableFromInline

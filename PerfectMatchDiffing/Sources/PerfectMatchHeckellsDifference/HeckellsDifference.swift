@@ -11,6 +11,7 @@ public struct HeckellsDifference<
   @usableFromInline
   private(set) var moves = [Move]()
   
+  #warning("Using of unmanaged memory here causes segmentation fault in swift-benchmark")
   @inlinable
   public init(of old: DiffableCollection, and new: DiffableCollection) {
     if old.isEmpty, new.isEmpty {

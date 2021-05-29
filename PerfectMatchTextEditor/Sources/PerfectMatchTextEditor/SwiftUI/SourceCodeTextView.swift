@@ -11,9 +11,9 @@ public struct SourceCodeTextView: NSViewRepresentable {
   
   @Binding private var text: String
   
-  private var shouldBecomeFirstResponder: Bool
   private var isEditable: Bool
   private var customisation: Customization
+  private var linesHighlighter: ((SyntaxTextView) -> Void)? = nil
   
   public init(
     text: Binding<String>,
@@ -21,12 +21,12 @@ public struct SourceCodeTextView: NSViewRepresentable {
     customization: Customization = .init(
       lexerForSource: { ShellLexer() }
     ),
-    shouldBecomeFirstResponder: Bool = false
+    linesHighlighter: ((SyntaxTextView) -> Void)? = nil
   ) {
     self._text = text
     self.isEditable = isEditable
     self.customisation = customization
-    self.shouldBecomeFirstResponder = shouldBecomeFirstResponder
+    self.linesHighlighter = linesHighlighter
   }
   
   public func makeCoordinator() -> Coordinator {
@@ -50,8 +50,10 @@ public struct SourceCodeTextView: NSViewRepresentable {
       environment.colorScheme == .light ? .black : .white
     wrappedView.scrollView.verticalScroller?.knobStyle =
       environment.colorScheme == .light ? .dark : .light
+
+    linesHighlighter?(wrappedView)
+
     return wrappedView
-//    wrappedView.updateLine(0, with: .asset(.primaryRed))
   }
     
     public func updateNSView(_ view: SyntaxTextView, context: Context) {}
@@ -70,15 +72,24 @@ extension SourceCodeTextView {
       swiftUIView.customisation.lexerForSource()
     }
     
-    public func didChangeText(_ syntaxTextView: SyntaxTextView) {
+    public func textDidChange(_ notification: Notification) {
       DispatchQueue.main.async {
-        self.swiftUIView.text = syntaxTextView.text
+        self.swiftUIView.text = self.representableView.text
       }
       swiftUIView.customisation.didChangeText?(swiftUIView)
     }
     
+    
     public func textDidBeginEditing(_ notification: Notification) {
       swiftUIView.customisation.textViewDidBeginEditing?(swiftUIView)
+    }
+    
+    #warning("Called only on delegate set")
+    public func didChangeText(_ syntaxTextView: SyntaxTextView) {
+//      DispatchQueue.main.async {
+//        self.swiftUIView.text = syntaxTextView.text
+//      }
+//      swiftUIView.customisation.didChangeText?(swiftUIView)
     }
   }
 }

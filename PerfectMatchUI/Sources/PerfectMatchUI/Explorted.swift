@@ -3,6 +3,25 @@
 @_exported import Foundation
 @_exported import PerfectMatchResources
 
+#warning("Need a maper from kUTTypeURL to UTType")
+internal extension NSItemProvider {
+  func loadURL(
+    onLoad: @escaping (Result<URL, Error>) -> Void
+  ) {
+    loadItem(
+      forTypeIdentifier: kUTTypeURL as String,
+      options: nil
+    ) { data, error in
+      if let error = error {
+        return onLoad(.failure(error))
+      }
+      if let url = URL(dataRepresentation: data as! Data, relativeTo: nil) {
+        return onLoad(.success(url))
+      }
+    }
+  }
+}
+
 internal extension Substring {
   var lastPathComponent: String { (self as NSString).lastPathComponent }
 }
