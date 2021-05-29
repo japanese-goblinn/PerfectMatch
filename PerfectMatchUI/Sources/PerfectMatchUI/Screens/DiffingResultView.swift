@@ -12,7 +12,16 @@ struct DiffingResultView: View {
       isEditable: false,
       customization: .init(
         lexerForSource: { ShellLexer() }
-      )
+      ),
+      linesHighlighter: { wrappedView in
+        wrappedView.updateLineBackground(at: 0, with: .asset(.primaryRed, alpha: 0.5))
+        wrappedView.updateLineBackground(at: 3, with: .asset(.primaryGreen, alpha: 0.5))
+        wrappedView.updateLineBackground(at: 4, with: .asset(.primaryRed, alpha: 0.5))
+        wrappedView.updateLineBackground(at: 6, with: .asset(.primaryRed, alpha: 0.5))
+        wrappedView.updateLineBackground(at: 7, with: .asset(.primaryRed, alpha: 0.5))
+        wrappedView.updateLineBackground(at: 8, with: .asset(.primaryRed, alpha: 0.5))
+        wrappedView.updateLineBackground(at: 10, with: .asset(.primaryGreen, alpha: 0.5))
+      }
     )
     .id(theme == .light ? UUID() : UUID())
     

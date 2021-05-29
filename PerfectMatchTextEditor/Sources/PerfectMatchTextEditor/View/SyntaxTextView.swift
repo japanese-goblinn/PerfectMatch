@@ -276,8 +276,9 @@ open class SyntaxTextView: _View {
   }
   
   // MARK: -
-  public func updateLine(
-    _ lineNumber: Int,
+  
+  public func updateLineBackground(
+    at lineNumber: Int,
     with color: Color
   ) {
     guard let layoutManager = textView.layoutManager else { return }
