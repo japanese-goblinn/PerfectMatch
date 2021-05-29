@@ -12,6 +12,10 @@ public extension NSColor {
   static func asset(_ color: ColorResource) -> NSColor {
     return .init(named: color.name, bundle: .module)!
   }
+  
+  static func asset(_ color: ColorResource, alpha: CGFloat) -> NSColor {
+    return .init(named: color.name, bundle: .module)!.withAlphaComponent(alpha)
+  }
 }
 
 public struct ColorResource {
