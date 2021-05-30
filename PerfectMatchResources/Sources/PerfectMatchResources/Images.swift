@@ -18,8 +18,7 @@ public extension SFSymbol {
 }
 
 public struct SFSymbol {
-  @usableFromInline
-  internal let name: String
+  public let name: String
 
   public init(name: String) {
     self.name = name
