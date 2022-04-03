@@ -3,12 +3,12 @@ import PerfectMatchHeckellsDifference
 public struct ContentView: View {
   @State private var firstFileURL: String?
   @State private var isFirstPaneTextViewInFocus: Bool = true
-  @State private var firstTextToDiff: String = ""
+  @State private var firstTextToDiff: String = .mock()
   @State private var isTryingToDropFileOnFirstPane: Bool = false
 
   @State private var secondFileURL: String?
   @State private var isSecondPaneTextViewInFocus: Bool = true
-  @State private var secondTextToDiff: String = ""
+  @State private var secondTextToDiff: String = .mock1()
   @State private var isTryingToDropFileOnSecondPane: Bool = false
   
   @State private var isShowingDiffingResultView: Bool = false

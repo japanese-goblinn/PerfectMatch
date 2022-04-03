@@ -276,6 +276,12 @@ open class SyntaxTextView: _View {
   }
   
   // MARK: -
+  public func updateSymbolBackground(
+    at position: Int,
+    with color: Color
+  ) {
+    
+  }
   
   public func updateLineBackground(
     at lineNumber: Int,

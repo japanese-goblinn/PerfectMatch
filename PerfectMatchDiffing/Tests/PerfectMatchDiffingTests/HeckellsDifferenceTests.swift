@@ -73,5 +73,30 @@ internal final class PerfectMatchDiffingTests: XCTestCase {
       _ = HeckellsDifference(of: s1, and: s2)
     }
   }
+    
+  internal func testDiffApply() {
+    let s1 = [1, 2, 3, 3, 4]
+    let s2 = [2, 3, 1, 3, 4]
+    let diff = HeckellsDifference(of: s1, and: s2)
+
+    var deletions = [HeckellsDifference<[Int]>.Index]()
+    var insertions = [HeckellsDifference<[Int]>.Index]()
+
+    for move in diff.moves {
+      switch move {
+      case let .delete(index):
+        deletions.append(index)
+      case let .insert(index):
+        insertions.append(index)
+      case let .move(from: fromIndex, to: toIndex):
+        deletions.append(fromIndex)
+        insertions.append(toIndex)
+      case let .update(index):
+        fatalError()
+      }
+    } 
+
+    insertions.sort(by: >)
+  }
   
 }

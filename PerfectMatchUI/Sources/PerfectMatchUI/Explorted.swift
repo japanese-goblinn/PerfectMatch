@@ -3,7 +3,7 @@
 @_exported import Foundation
 @_exported import PerfectMatchResources
 
-#warning("Need a maper from kUTTypeURL to UTType")
+#warning("Need a mapper from kUTTypeURL to UTType")
 internal extension NSItemProvider {
   func loadURL(
     onLoad: @escaping (Result<URL, Error>) -> Void
@@ -49,9 +49,8 @@ internal struct ViewRepresentable<WrappedView: NSView>: NSViewRepresentable {
 }
 
 extension String {
-  static func mock() -> Self {
+  static func mock1() -> Self {
     """
-    #!/bin/bash
 
     # Usage
     # rename_assets path/to/Assets.xcassets (just rename_assets will use default path)
@@ -61,7 +60,6 @@ extension String {
     # Possible problems:
     # assets is processing in order that they presented in directory and do not compared by size
     # so if asset, asset@2x, asset@3x is presetned in directory they should be placed in right order
-
     set -e
 
     GREEN="\033[32m"
@@ -69,7 +67,7 @@ extension String {
     RED="\033[31m"
     COLOR_RESET="\033[0m"
 
-    BASE_DIR=${1-"./EduDoResources/Sources/EduDoResources/Resources/Assets.xcassets/"}
+    BASE_DIR=$1
     EXT_TO_BE_RENAMED=("png" "svg" "pdf")
 
     rename_file() {
@@ -93,29 +91,49 @@ extension String {
             mv "$file_to_rename" "${dir_full}/${rename_to}@${asset_count}x.${ext}"
         fi
     }
+    """
+  }
+  static func mock() -> Self {
+    """
+    #!/bin/bash
 
-    traverse_files_from_dir() {
-        local asset_count=0
-        for i in "$1"/*; do
-            if [[ ! -d "$i" ]]; then
-                rename_file "$i" "$asset_count"
-                local is_rename_succeeded=$?
-                if [[ "$is_rename_succeeded" != 0 ]]; then continue; fi
-                (( asset_count += 1 ))
-            else
-                traverse_files_from_dir "$i"
-            fi
-        done
+    # Usage
+
+    # In current implementation do not updates `Contents.json` file :c
+
+    # so if asset, asset@2x, asset@3x is presetned in directory they should be placed in right order
+
+    set -e
+
+    GREEN="\033[32m"
+    PURPLE="\033[95m"
+    RED="\033[31m"
+    COLOR_RESET="\033[0m"
+
+    BASE_DIR=$1
+    EXT_TO_BE_RENAMED=("png" "svg" "pdf")
+
+    rename_file() {
+        if [[ ! -f $1 ]]; then return 1; fi
+        local dir=$(dirname "$1")
+        if [[ "${dir##*.}" != "imageset" ]]; then return 1; fi
+        local ext="${1##*.}"
+        if [[ ! "${EXT_TO_BE_RENAMED[@]}" =~ $ext ]]; then return 1; fi
+
+        local dir=$(dirname "$1")
+        local ext="${1##*.}"
+        local file_to_rename="$1"
+        local rename_to=$(basename "${dir%.*}")
+        local dir_full="$dir"
+        local asset_count="$2"
+        (( asset_count += 1 ))
+       
+        if [[ "$asset_count" == 1 ]]; then
+            mv "$file_to_rename" "${dir_full}/${rename_to}.${ext}"
+        else
+            mv "$file_to_rename" "${dir_full}/${rename_to}@${asset_count}x.${ext}"
+        fi
     }
-
-    if [[ $(basename "$BASE_DIR") != "Assets.xcassets" ]]; then
-        echo -e "${RED}🛑 ERROR:${COLOR_RESET} Not an '*.xcassets' directory"
-        exit
-    fi
-
-    echo -e "${PURPLE}🚀 Processing...${COLOR_RESET}"
-    traverse_files_from_dir "$BASE_DIR" && echo -e "${GREEN}✅ DONE${COLOR_RESET}"
-
     """
   }
 }
